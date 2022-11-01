@@ -1,20 +1,32 @@
-function formaPago() {
-    let formaPago = parseInt(prompt('Ingrese forma de pago 1.Debito 2.Credito 3.Tranferencia Bancaria 4.Mercado Pago'));
+function formaPago(total) {
+    let formaPago = parseInt(prompt('Ingrese forma de pago \n 1.Debito \n 2.Credito'));
     if (formaPago === 1) {
         let tarjeta = parseInt(prompt("Ingrese numero de tarjeta"));
-        alert("Pago realizado con exito");
+        alert("Pago de " + total +" realizado con exito");
     }
     else if (formaPago === 2) {
-        let cuotas
+        let cuotas = parseInt(prompt('Ingrese el numero de cuotas \n 1 Cuota de' + total + ' \n 3 cuotas de ' + (total/3)*1.20 +   ' \n 6 cuotas de ' + (total/6)*1.40   ));
+        let tarjeta = parseInt(prompt("Ingrese numero de tarjeta"));
+        if(cuotas === 1){
+            alert("Pago de " + total +" realizado con exito");
+        }
+        else if(cuotas ===3){
+            alert("Pago de 3 cuotas de " + (total/3)*1.20 +" realizado con exito");
+        }
+
+        else if(cuotas ===6){
+            alert("Pago de 6 cuotas de " + (total/6)*1.40 +" realizado con exito");
+        }
     }
+    return true;
 }
 
 
 function productos(total) {
-    let categoria = parseInt(prompt("Ingrese la categoria deseada: 1.Smartv 2.Audio 3.Playstation 4.Camaras 5.Celulares"));
+    let categoria = parseInt(prompt("Ingrese la categoria deseada: \n 1.Smartv \n 2.Audio \n 3.Playstation"));
     let opcion;
     if (categoria === 1) {
-        opcion = parseInt(prompt("Smartvs Disponibles: 1.Phillips 43 pulgadas $79.999 2.Samsung 50 pulgadas $99.999 3.Philco 32 $69.999"));
+        opcion = parseInt(prompt("Smartvs Disponibles: \n 1.Phillips 43 pulgadas $79.999 \n 2.Samsung 50 pulgadas $99.999 \n 3.Philco 32 $69.999"));
         if (opcion === 1) {
             //   carrito = carrito + 'Phillips 43 pulgadas $79.999 ';
             total = total + 79999;
@@ -29,7 +41,7 @@ function productos(total) {
         }
     }
     else if (categoria === 2) {
-        opcion = parseInt(prompt("Productos Disponibles: 1.Auriculares Sony $5999 2.Auriculares Sony Inalambricos $8999 3.Parlante Inalambrico Sony $129.999"));
+        opcion = parseInt(prompt("Productos Disponibles: \n 1.Auriculares Sony $5999 \n 2.Auriculares Sony Inalambricos $8999 \n 3.Parlante Inalambrico Sony $129.999"));
         if (opcion === 1) {
             //  carrito = carrito + 'Auriculares Sony $5999 ';
             total = total + 5999;
@@ -44,7 +56,7 @@ function productos(total) {
         }
     }
     else if (categoria === 3) {
-        opcion = parseInt(prompt("Playstations disponibles: 1.Playstation 5 $329000 2.Playstation 4 $150000"));
+        opcion = parseInt(prompt("Playstations disponibles: \n 1.Playstation 5 $329000 \n 2.Playstation 4 $150000"));
         if (opcion === 1) {
            // carrito = carrito + 'Playstation 5 $329000 ';
             total = total + 329000;
@@ -77,4 +89,10 @@ while (comprar === true) {
     if (preguntar === 2) {
         comprar = false;
     }
+
+
+}
+
+if(formaPago(precioTotal)){
+    alert('Gracia por su compra, vuelvas prontos')
 }
