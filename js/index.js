@@ -1,77 +1,114 @@
-class producto {
-    constructor(id, nombre, precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
+const nombre = JSON.parse(localStorage.getItem('usuario')) || '';
+const divusuario = document.getElementById('divusuario');
+
+if(nombre === ''){
+    divusuario.innerHTML = ` <input type="text" name="user" id="user" placeholder="Ingrese su nombre">
+    <a class="btn btn-danger" id="ingresar" href="">Ingresar</a>
+    `;
+   const user = document.getElementById('user');
+const ingresar = document.getElementById('ingresar');
+ingresar.onclick = () => {
+    console.log(user.value)
+    localStorage.setItem('usuario', JSON.stringify(user.value))
 }
-const productos = [];
 
-const producto1 = new producto(1, "Hamburguesa Completa", 800);
-productos.push(producto1);
+}
+else{
+    divusuario.innerHTML = `Hola ${nombre}, Bienvenido a nuestra tienda de Comida`;
+    class producto {
+        constructor(id, nombre, precio) {
+            this.id = id;
+            this.nombre = nombre;
+            this.precio = precio;
+        }
+    }
+    const productos = [];
+    
+    const producto1 = new producto(1, "Hamburguesa Completa", 800);
+    productos.push(producto1);
+    
+    const producto2 = new producto(2, "Piza Muzzarella", 1200);
+    productos.push(producto2);
+    
+    const producto3 = new producto(3, "Empanadas", 1000);
+    productos.push(producto3);
+    
+    const producto4 = new producto(4, "Ñoquis", 600);
+    productos.push(producto4);
+    
+    
+    const divProductos = document.getElementById('productos');
+    
+    productos.forEach(prod => {
+        divProductos.innerHTML += `
+        <div class="col-sm-4">
+            <div class="card" style="width: 100%;" id="div${prod.id}">
+                
+                    <div class="card-body">
+                        <h5 class="card-title">${prod.nombre}</h5>
+                        <p class="card-text">${prod.precio}</p>
+                        <button class="btn btn-primary" id="${prod.id}">Agregar al carrito</button>
+                    </div>
+            </div>
+        </div>`
+    });
+    
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const botonesAgregar = document.querySelectorAll('.btn-primary');
+    console.log(botonesAgregar)
+    
+    botonesAgregar.forEach(boton=>{
+        boton.onclick = () => {
+            const prodselecionado = productos.find(prod=>prod.id === parseInt(boton.id))
+            // console.log(prodselecionado)
+            // console.log(boton.id)
+    
+            const productoCarrito = {...prodselecionado, cantidad:1}
+    
+            const indexCarrito = carrito.findIndex(prod=> prod.id === productoCarrito.id)
 
-const producto2 = new producto(2, "Piza Muzzarella", 1200);
-productos.push(producto2);
-
-const producto3 = new producto(3, "Empanadas", 1000);
-productos.push(producto3);
-
-const producto4 = new producto(4, "Ñoquis", 600);
-productos.push(producto4);
-
-
-const divProductos = document.getElementById('productos');
-
-productos.forEach(prod => {
-    divProductos.innerHTML += `
-    <div class="col-sm-4">
-        <div class="card" style="width: 100%;" id="div${prod.id}">
+           
+    
+            if(indexCarrito === -1){
+                carrito.push(productoCarrito)
+                
+                
+            }
+            else{
+                carrito[indexCarrito].cantidad ++
+            }
+            localStorage.setItem('carrito', JSON.stringify(carrito))
+            console.log(carrito)
             
-                <div class="card-body">
-                    <h5 class="card-title">${prod.nombre}</h5>
-                    <p class="card-text">${prod.precio}</p>
-                    <button class="btn btn-primary" id="${prod.id}">Agregar al carrito</button>
-                </div>
-        </div>
-    </div>`
-});
-
-const carrito = [];
-const botonesAgregar = document.querySelectorAll('.btn-primary');
-console.log(botonesAgregar)
-
-botonesAgregar.forEach(boton=>{
-    boton.onclick = () => {
-        const prodselecionado = productos.find(prod=>prod.id === parseInt(boton.id))
-        // console.log(prodselecionado)
-        // console.log(boton.id)
-
-        const productoCarrito = {...prodselecionado, cantidad:1}
-
-        const indexCarrito = carrito.findIndex(prod=> prod.id === productoCarrito.id)
-
-        if(indexCarrito === -1){
-            carrito.push(productoCarrito)
         }
-        else{
-            carrito[indexCarrito].cantidad ++
-        }
-        console.log(carrito)
-
     }
-}
-)
+    )
+   
+    const finalizar = document.getElementById('finalizar');
+    finalizar.innerHTML = `<a class="btn btn-success" id="botonFinalizar">Finalizar compra</a>"`
+        const finalizarCompra = document.querySelector('#botonFinalizar')
+        finalizarCompra.onclick = () => {
+            const valores = carrito.map(prod => prod.precio * prod.cantidad) 
+            let totalCompra =0
+            valores.forEach(valor =>{
+                totalCompra += valor
+            })
+            console.log(valores)
+            console.log(totalCompra)
+        
+    }
+   
 
-const finalizar = document.querySelector('#finalizar')
-finalizar.onclick = () => {
-    const valores = carrito.map(prod => prod.precio * prod.cantidad) 
-    let totalCompra =0
-    valores.forEach(valor =>{
-        totalCompra += valor
-    })
-    console.log(valores)
-    console.log(totalCompra)
 }
+
+    
+  
+
+
+
+
+
+
 
 
 
