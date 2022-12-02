@@ -1,20 +1,27 @@
 const nombre = JSON.parse(localStorage.getItem('usuario')) || '';
 const divusuario = document.getElementById('divusuario');
+const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+document.getElementById("paso1").style.display = "none";
+document.getElementById("paso2").style.display = "none";
+document.getElementById("paso3").style.display = "none";
+document.getElementById("comprobante").style.display = "none";
 
 if(nombre === ''){
     divusuario.innerHTML = ` <input type="text" name="user" id="user" placeholder="Ingrese su nombre">
     <a class="btn btn-danger" id="ingresar" href="">Ingresar</a>
     `;
-   const user = document.getElementById('user');
-const ingresar = document.getElementById('ingresar');
-ingresar.onclick = () => {
-    console.log(user.value)
-    localStorage.setItem('usuario', JSON.stringify(user.value))
-}
+    const user = document.getElementById('user');
+    const ingresar = document.getElementById('ingresar');
+    ingresar.onclick = () => {
+        console.log(user.value)
+        localStorage.setItem('usuario', JSON.stringify(user.value))
+    }
 
 }
 else{
     divusuario.innerHTML = `Hola ${nombre}, Bienvenido a nuestra tienda de Comida`;
+    document.getElementById("paso1").style.display = "block";
     class producto {
         constructor(id, nombre, precio) {
             this.id = id;
@@ -39,6 +46,7 @@ else{
     
     const divProductos = document.getElementById('productos');
     
+    
     productos.forEach(prod => {
         divProductos.innerHTML += `
         <div class="col-sm-4">
@@ -53,9 +61,9 @@ else{
         </div>`
     });
     
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
     const botonesAgregar = document.querySelectorAll('.btn-primary');
-    console.log(botonesAgregar)
+    // console.log(botonesAgregar)
     
     botonesAgregar.forEach(boton=>{
         boton.onclick = () => {
@@ -71,7 +79,7 @@ else{
     
             if(indexCarrito === -1){
                 carrito.push(productoCarrito)
-                
+                botonFinalizar()
                 
             }
             else{
@@ -79,24 +87,68 @@ else{
             }
             localStorage.setItem('carrito', JSON.stringify(carrito))
             console.log(carrito)
-            
+            botonFinalizar()
         }
     }
     )
-   
+
+    if(carrito.length>0){
+        botonFinalizar()
+    }
+
+    function botonFinalizar () {
     const finalizar = document.getElementById('finalizar');
-    finalizar.innerHTML = `<a class="btn btn-success" id="botonFinalizar">Finalizar compra</a>"`
-        const finalizarCompra = document.querySelector('#botonFinalizar')
-        finalizarCompra.onclick = () => {
-            const valores = carrito.map(prod => prod.precio * prod.cantidad) 
-            let totalCompra =0
-            valores.forEach(valor =>{
-                totalCompra += valor
+    finalizar.innerHTML = `<a class="btn btn-success" id="botonFinalizar">Finalizar compra</a>`
+    const finalizarCompra = document.querySelector('#botonFinalizar')
+    finalizarCompra.onclick = () => {
+        
+        document.getElementById("paso1").style.display = "none";
+        document.getElementById("paso2").style.display = "block";
+        document.getElementById("paso3").style.display = "block";
+            document.getElementById("botonFinalizar").style.display = "none";
+          
+            const tabla =document.querySelector('.tabla')
+            carrito.forEach(prod => {
+                tabla.innerHTML += `
+                <tr>
+                
+                <td>${prod.nombre}</td>
+                <td>${prod.cantidad}</td>
+                <td>${prod.precio}</td>
+                <td>${prod.precio*prod.cantidad}</td>
+              </tr>
+               `
             })
-            console.log(valores)
-            console.log(totalCompra)
+
+        const valores = carrito.map(prod => prod.precio * prod.cantidad) 
+        const totalfinal = document.querySelector(".totalfinal")
+        let totalCompra =0
+        valores.forEach(valor =>{
+            totalCompra += valor
+        })
+
+        totalfinal.innerHTML += `<h3>Total: ${totalCompra} </h3> `
+       
+            
         
     }
+ }
+   const pagar = document.getElementById('pagar')
+   pagar.onclick = () =>{
+    document.getElementById("paso1").style.display = "none";
+        document.getElementById("paso2").style.display = "none";
+        document.getElementById("paso3").style.display = "none";
+        document.getElementById("comprobante").style.display = "block";
+   }
+  
+   const volver = document.getElementById('volver')
+   volver.onclick = () =>{
+    document.getElementById("paso1").style.display = "block";
+        document.getElementById("paso2").style.display = "none";
+        document.getElementById("paso3").style.display = "none";
+        document.getElementById("comprobante").style.display = "none";
+        botonFinalizar()
+   }
    
 
 }
