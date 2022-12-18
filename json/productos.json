@@ -1,0 +1,56 @@
+[
+    {
+        "id":1,
+        "nombre":"Asado",
+        "precio":1500,
+        "img":"asado-min.jpg" 
+    },
+    {
+        "id":2,
+        "nombre":"Empanadas",
+        "precio":1000,
+        "img":"empanadas-min.jpg"
+    },
+    {
+        "id":3,
+        "nombre":"Guiso de lentejas",
+        "precio":800,
+        "img":"guiso-min.jpg"
+    },
+    {
+        "id":4,
+        "nombre":"Hamburguesa completa",
+        "precio": 1200,
+        "img":"hamburguesa-min.jpg"
+    },
+    {
+        "id":5,
+        "nombre":"Lasagna",
+        "precio":700,
+        "img":"lasagna-min.png"
+    },
+    {
+        "id":6,
+        "nombre":"Matambre a la Pizza",
+        "precio":1800,
+        "img":"matambre-min.jpg"
+    },
+    {
+        "id":7,
+        "nombre":"Pizza",
+        "precio":1100,
+        "img":"pizza-min.jpg"
+    },
+    {
+        "id":8,
+        "nombre":"Salmon con Salsa de champiñones",
+        "precio":2500,
+        "img":"salmon-min.jpg"
+    },
+    {
+        "id":9,
+        "nombre":"Tallarines",
+        "precio":900,
+        "img":"tallarines-min.jpg"
+    }
+]
