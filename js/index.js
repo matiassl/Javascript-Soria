@@ -35,83 +35,63 @@ else {
             this.img = img;
         }
     }
-    const productos = [];
+    // const productos = [];
 
-    const producto1 = new producto(1, "Asado", 1500, "asado-min.jpg");
-    productos.push(producto1);
+    // const producto1 = new producto(1, "Asado", 1500, "asado-min.jpg");
+    // productos.push(producto1);
 
-    const producto2 = new producto(2, "Empanadas", 1000, "empanadas-min.jpg");
-    productos.push(producto2);
+    // const producto2 = new producto(2, "Empanadas", 1000, "empanadas-min.jpg");
+    // productos.push(producto2);
 
-    const producto3 = new producto(3, "Guiso de Lentejas", 800, "guiso-min.jpg");
-    productos.push(producto3);
+    // const producto3 = new producto(3, "Guiso de Lentejas", 800, "guiso-min.jpg");
+    // productos.push(producto3);
 
-    const producto4 = new producto(4, "Hamburguesa Completa", 1200, "hamburguesa-min.jpg");
-    productos.push(producto4);
+    // const producto4 = new producto(4, "Hamburguesa Completa", 1200, "hamburguesa-min.jpg");
+    // productos.push(producto4);
 
-    const producto5 = new producto(5, "Lasagna", 700, "lasagna-min.png");
-    productos.push(producto5);
+    // const producto5 = new producto(5, "Lasagna", 700, "lasagna-min.png");
+    // productos.push(producto5);
 
-    const producto6 = new producto(6, "Matambre a la Pizza", 1800, "matambre-min.jpg");
-    productos.push(producto6);
+    // const producto6 = new producto(6, "Matambre a la Pizza", 1800, "matambre-min.jpg");
+    // productos.push(producto6);
 
-    const producto7 = new producto(7, "Piza Muzzarella", 1100, "pizza-min.jpg");
-    productos.push(producto7);
+    // const producto7 = new producto(7, "Piza Muzzarella", 1100, "pizza-min.jpg");
+    // productos.push(producto7);
 
-    const producto8 = new producto(8, "Salmon con Salsa", 2500, "salmon-min.jpg");
-    productos.push(producto7);
+    // const producto8 = new producto(8, "Salmon con Salsa", 2500, "salmon-min.jpg");
+    // productos.push(producto7);
 
 
     const divProductos = document.getElementById('listaproductos');
-    // const lista = [];
-    // const consultarProductos = async () => {
-    //     const response = await fetch('../json/productos.json');
-    //     const productos = await response.json();
+    const lista = [];
+    const consultarProductos = async () => {
+        const response = await fetch('../json/productos.json');
+        const productos = await response.json();
 
-    //     productos.forEach ( p=>{
-    //         lista.push(p)
-    //     })
+        // productos.forEach ( p=>{
+        //     lista.push(p)
+        // })
 
-    //     return productos;
-    // }
+        return productos;
+    }
 
-    // consultarProductos().then(lista => {
-    //     console.log(lista);
-    //     lista.forEach(producto=>{
-    //         divProductos.innerHTML += `
-    //         <div class="col-sm-4">
-    //         <div class="card"  id="div${producto.id}">
-    //             <img src="./img/productos/${producto.img}" class="card-img-top img-fluid" alt="...">
-    //                 <div class="card-body">
-    //                     <h5 class="card-title">${producto.nombre}</h5>
-    //                     <p class="card-text">$ ${producto.precio}</p>
-    //                     <button class="btn btn-primary" id="${producto.id}">Agregar al carrito</button>
-    //                 </div>
-    //         </div>
-    //     </div>
-    //         `
-    //     })
-
-    // })
-
-
-
-    productos.forEach(producto => {
-        divProductos.innerHTML += `
-        <div class="col-sm-3">
-        <div class="card mb-3"  id="div${producto.id}">
-            <img src="./img/productos/${producto.img}" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${producto.nombre}</h5>
-                    <p class="card-text">$ ${producto.precio}</p>
-                    <button class="btn btn-primary" id="${producto.id}">Agregar al carrito</button>
-                </div>
+    consultarProductos().then(productos => {        
+        productos.forEach(producto=>{
+            divProductos.innerHTML += `
+            <div class="col-sm-3">
+            <div class="card"  id="div${producto.id}">
+                <img src="./img/productos/${producto.img}" class="card-img-top img-fluid" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.nombre}</h5>
+                        <p class="card-text">$ ${producto.precio}</p>
+                        <button class="btn btn-primary" id="${producto.id}">Agregar al carrito</button>
+                    </div>
+            </div>
         </div>
-    </div>`
-    });
+            `
+        });
 
-
-    const botonesAgregar = document.querySelectorAll('.btn-primary');
+        const botonesAgregar = document.querySelectorAll('.btn-primary');
     // console.log(botonesAgregar)
 
 
@@ -154,6 +134,27 @@ else {
     }
     )
 
+
+    })
+
+
+
+    // productos.forEach(producto => {
+    //     divProductos.innerHTML += `
+    //     <div class="col-sm-3">
+    //     <div class="card mb-3"  id="div${producto.id}">
+    //         <img src="./img/productos/${producto.img}" class="card-img-top img-fluid" alt="...">
+    //             <div class="card-body">
+    //                 <h5 class="card-title">${producto.nombre}</h5>
+    //                 <p class="card-text">$ ${producto.precio}</p>
+    //                 <button class="btn btn-primary" id="${producto.id}">Agregar al carrito</button>
+    //             </div>
+    //     </div>
+    // </div>`
+    // });
+
+
+    
    
         //   BOTON QUITAR
 
@@ -201,7 +202,7 @@ else {
                     <td>${prod.cantidad}</td>
                     <td>${prod.precio}</td>
                     <td>${prod.precio * prod.cantidad}</td>
-                    <td><a class="btn btn-danger quitar" id="${prod.id}">Quitar</a></td>
+                    
               </tr>
                `
             })
