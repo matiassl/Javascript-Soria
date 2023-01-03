@@ -25,11 +25,19 @@ body{
 
 }
 
-.bienvenido{
-    position: absolute;
+.menu{
+    position: sticky;
     top: 0;
     width: 100%;
     background-color: rgb(179, 19, 19);
+    height: 80px;
+    z-index: 5;
+}
+
+.bienvenido{
+    position: absolute;
+    top: 0;
+    width: 100%;    
     color: white;
     z-index: 8;
     font-size: 24px;
@@ -37,6 +45,21 @@ body{
     height: 80px;
     padding-top: 20px;
     font-weight: 500;
+}
+
+.b1{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.b1:hover{
+    background-color: white;
+    color: rgb(179, 19, 19);
+    transform: scale(1.1);
 }
 
 .listaproductos, .paso2, .comprobante{

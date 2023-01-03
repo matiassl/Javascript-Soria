@@ -3,7 +3,7 @@ const nombre = JSON.parse(localStorage.getItem('usuario')) || '';
 const login = document.getElementById('login');
 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 const paso1 = document.getElementById("paso1");
-document.getElementById("bienvenido").style.display = "none";
+document.getElementById("menu").style.display = "none";
 document.getElementById("paso1").style.display = "none";
 document.getElementById("paso2").style.display = "none";
 document.getElementById("paso3").style.display = "none";
@@ -24,7 +24,7 @@ else {
     bienvenido.innerText = `Hola ${nombre}, bienvenido a nuestra tienda de Comidas!`;
 
     document.getElementById("login").style.display = "none";
-    document.getElementById("bienvenido").style.display = "block";
+    document.getElementById("menu").style.display = "block";
     document.getElementById("paso1").style.display = "block";
 
     class producto {
@@ -184,7 +184,7 @@ else {
 
     function botonFinalizar() {
         const finalizar = document.getElementById('finalizar');
-        finalizar.innerHTML = `<a class="btn btn-success" id="botonFinalizar">Finalizar compra</a>`
+        finalizar.innerHTML = `<a class="btn b1" id="botonFinalizar">Finalizar compra</a>`
         const finalizarCompra = document.querySelector('#botonFinalizar')
         finalizarCompra.onclick = () => {
 
@@ -225,6 +225,8 @@ else {
         document.getElementById("paso2").style.display = "none";
         document.getElementById("paso3").style.display = "none";
         document.getElementById("comprobante").style.display = "block";
+        localStorage.removeItem('carrito');
+
     }
 
     const volver = document.getElementById('volver')
